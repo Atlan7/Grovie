@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    View {{ movie.name }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 my-5">
+            <h2 style="text-align: center;"> {{ movie.name }} </h2>
+            <div class="info_about_movie">
+                <img src="{{movie.title_image.url}}" width="300" height="400">
+                <br> 
+                <strong> 
+                Genre:
+                {% for genre in movie.genres.all  %}
+                    {{ genre }}, 
+                {% endfor %}
+                </strong>
+                <br>
+                <strong>
+                Movie actors:
+                {% for actor in movie.actors.all  %}
+                    {{ actor }}, 
+                {% endfor %}
+                </strong>
+                <br>
+                <strong>
+                Movie directors:
+                {% for director in movie.directors.all  %}
+                    {{ director }}, 
+                {% endfor %}
+                </strong>
+                <br>
+                <strong> Movie budget: {{ movie.budget }}$, </strong>
+                <br>
+                <strong> World fees: {{ movie.world_fees }}$, </strong>
+                <br>
+                <strong>World premier: {{ movie.world_premier }} </strong>
+                <br>
+                <strong> World rating: {{ movie.world_rating }}/10,</strong>
+
+            </div>
+            <br><br>
+            {{ movie.discription  }}
+        </div>
+    </div>
+{% endblock %}

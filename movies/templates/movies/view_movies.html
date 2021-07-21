@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    View movies 
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="row">
+        {% for movie in movies %}
+            <div class="col-sm-4 my-5">
+                <div class="card " style="width: 18rem;">
+                <img src="{{ movie.title_image.url }}" class="card-img-top" alt="..."  height="450">
+                  <div class="card-body">
+                      <h5 class="card-title"> {{ movie.name  }}</h5>
+                        <p class="card-text"> {{ movie.discription|truncatechars:50 }} </p>
+                        <p style="padding: 5px;"> World rating: {{ movie.world_rating }}/10, <br> Age recommendations: {{movie.min_viewing_age}} </p>
+                        <a href="{{ movie.get_absloute_url }}" class="btn btn-primary">View more</a>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
