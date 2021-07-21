@@ -1,4 +1,4 @@
-App_diagram
+*App_diagram
 
 .idea
 
@@ -8,10 +8,10 @@ App_diagram
 *.egg
 
 dist
-db.sqlite3
 
 .env
 venv
+*media
 
 __pycache__/
 */__pycache__/
