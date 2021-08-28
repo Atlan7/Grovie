@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <br>
+    {% include "inc/_form.html" with header="<h2> Login </h2>" btn_class="btn btn-success w-100" btn_message="Login" %}
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <a href="#"> Forgot your password? </a> 
+        </div>
+    </div>
+{% endblock %}
+

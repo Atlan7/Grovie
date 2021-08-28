@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block content %}
+    <br>
+    {% include "inc/_form.html" with header="<h2> Registration </h2>" btn_class="btn btn-success w-100" btn_message="Create new account" %}
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <a href="{% url 'accounts:login' %}"> Alredy have an account? </a> 
+        </div>
+    </div>
+{% endblock %}

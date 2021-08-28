@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit profile {{ user.username }}
+{% endblock %}
+
+{% block content %}
+    <br>
+    <style>
+        .profile-pic{
+            width: 200px;
+            height:200px;
+            margin: 0 auto;
+            border-radius: 10%;
+        }
+    </style>
+
+    <br>
+    <h2> Profile Settings </h2>
+    <hr>
+    <div class="row">
+        <div class="col-sm-10 col-md-5 col-lg-4">
+            <br>
+            <div class="card card-body">
+                <a class="btn btn-warning" href="{% url 'accounts:view-profile' username_slug=user.username %}"> &#8592; Back to Profile</a>
+                <hr>
+                <img class="profile-pic" src="{{ user.profile_image.url }}" >
+                <hr>
+                <h3 class="text-center"> {{ user.username }} </h3>
+            </div>
+        </div>
+
+        <br>
+        <div class="col-sm-10 col-md-7">
+            <br>
+            <div class="card card-body">
+                <form method="POST" action="" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    {{form.as_p}}
+
+                <button type="submit" class="btn btn-success">
+                    Change Profile
+                </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

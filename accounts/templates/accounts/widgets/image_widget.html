@@ -1,0 +1,8 @@
+{% if widget.is_initial %}
+    <p>
+        <img class="rounded app-icon" src="{{ widget.value.url }}">
+        <br>
+    </p>
+    {% comment %} <span class="text-muted">{{ widget.input_text }}:</span> {% endcomment %}
+{% endif %}
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
