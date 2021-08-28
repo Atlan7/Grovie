@@ -6,44 +6,65 @@
 
 
 {% block content %}
+    
+    <style>
+        .info_about_movie {
+            float: right;
+            padding: 50px;
+        }
+    </style>
+
     <div class="row">
-        <div class="col-md-12 my-5">
-            <h2 style="text-align: center;"> {{ movie.name }} </h2>
+        <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-md-12 offset-md-0 my-5">
+            <h2 class="text-center"> {{ movie.name }} </h2>
             <div class="info_about_movie">
-                <img src="{{movie.title_image.url}}" width="300" height="400">
+                <img class="rounded" src="{{movie.title_image.url}}" width="300" height="400">
                 <br> 
                 <strong> 
-                Genre:
-                {% for genre in movie.genres.all  %}
-                    {{ genre }}, 
-                {% endfor %}
+                    Genre:
+                    {% for genre in movie.genres.all  %}
+                        {{ genre }}, 
+                    {% endfor %}
+                    <br>
+                    Movie actors:
+                    {% for actor in movie.actors.all  %}
+                        {{ actor }}, 
+                    {% endfor %}
+                    <br>
+                    Movie directors:
+                    {% for director in movie.directors.all  %}
+                        {{ director }}, 
+                    {% endfor %}
+                    <br>
+                    Movie budget: {{ movie.budget }}$,
+                    <br>
+                    World fees: {{ movie.world_fees }}$,
+                    <br>
+                    World premier: {{ movie.world_premier }}
+                    <br>
+                    World rating: {{ movie.world_rating }}/10
                 </strong>
-                <br>
-                <strong>
-                Movie actors:
-                {% for actor in movie.actors.all  %}
-                    {{ actor }}, 
-                {% endfor %}
-                </strong>
-                <br>
-                <strong>
-                Movie directors:
-                {% for director in movie.directors.all  %}
-                    {{ director }}, 
-                {% endfor %}
-                </strong>
-                <br>
-                <strong> Movie budget: {{ movie.budget }}$, </strong>
-                <br>
-                <strong> World fees: {{ movie.world_fees }}$, </strong>
-                <br>
-                <strong>World premier: {{ movie.world_premier }} </strong>
-                <br>
-                <strong> World rating: {{ movie.world_rating }}/10,</strong>
-
             </div>
             <br><br>
-            {{ movie.discription  }}
+            {{ movie.discription|safe|linebreaks  }}
+            <form method="POST" action="{% url 'movies:like-movie' movie.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name"next" value="{{ request.path }}"> 
+                <button type="submit" class="btn btn-success">
+                    Like movie - {{ movie.likes.all.count }}
+                </button>
+            </form>
+
+            </br>
+
+            <form method="POST" action="{% url 'movies:dislike-movie' movie.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name"next" value="{{ request.path }}"> 
+                <button type="submit" class="btn btn-danger">
+                    Dislike movie - {{ movie.dislikes.all.count }}
+                </button>
+            </form>
         </div>
     </div>
 {% endblock %}
+

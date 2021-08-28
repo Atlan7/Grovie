@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+
+
 {% block title %} 
     View movies 
 {% endblock %}
@@ -9,17 +11,33 @@
 {% block content %}
     <div class="row">
         {% for movie in movies %}
-            <div class="col-sm-4 my-5">
-                <div class="card " style="width: 18rem;">
-                <img src="{{ movie.title_image.url }}" class="card-img-top" alt="..."  height="450">
-                  <div class="card-body">
+            <div class="col-sm-10 offset-sm-2 col-md-6 offset-md-0 col-lg-5 col-xl-4 my-2">
+                <br>
+                <div class="card h-100" style="width: 16rem;">
+                    <img src="{{ movie.title_image.url }}" class="card-img-top" class="rounded" alt="..." height="350px" >
+                    <div class="card-body">
                       <h5 class="card-title"> {{ movie.name  }}</h5>
-                        <p class="card-text"> {{ movie.discription|truncatechars:50 }} </p>
+                        <p class="card-text"> {{ movie.discription|truncatechars:30 }} </p>
                         <p style="padding: 5px;"> World rating: {{ movie.world_rating }}/10, <br> Age recommendations: {{movie.min_viewing_age}} </p>
-                        <a href="{{ movie.get_absloute_url }}" class="btn btn-primary">View more</a>
-                  </div>
+                        <a href="{{ movie.get_absloute_url }}" class="btn btn-success">View more</a>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 {% endblock %}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+</div>
