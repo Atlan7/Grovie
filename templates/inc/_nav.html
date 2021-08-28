@@ -1,21 +1,45 @@
-<nav class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark main-nav">
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark main-nav">
     <div class="container">
-    <a class="navbar-brand mr-0" href="{% url 'movies:view_movies' %}">Grovie</a>
-      <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-        <ul class="nav navbar-nav mx-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'movies:view_movies' %}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-        </ul>
+        <div class="navbar-brand" > 
+            <a href="{% url 'movies:view-movies' %}"><img src="{% static 'logo/grovie-logo-1.png' %}" class="img-responsive" width="200px" height="60px"></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> 
+        </button>
+
+        <div id="main-menu" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'movies:view-movies' %}"> Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> About </a>
+                </li>
+            </ul>
+        </div>
+
         <ul class="nav navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle mx-4" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Profile 
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="{% url 'accounts:view-profile' username_slug=user.username %}"> View Profile </a></li>
+                    <li><a class="dropdown-item" href="#"> Watch list </a></li>
+                    <li><a class="dropdown-item" href="{% url 'accounts:edit-profile' username_slug=user.username  %}"> Edit Profile </a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'accounts:logout' %}"> Logout </a></li>
+                  </ul>
+                </li>
+            {% else %}
+                <span class="navbar-text">
+                    <a href="{% url 'accounts:registration' %}"> registration </a> | 
+                    <a href="{% url 'accounts:login' %}"> login </a>
+                </span>
+            {% endif %}
         </ul>
     </div>
 </nav>
+
